@@ -1,4 +1,4 @@
-#' @useDynLib mypackage, .registration=TRUE
+#' @useDynLib queueR, .registration=TRUE
 
 #' @importFrom stats integrate
 #' @importFrom stats qgamma
