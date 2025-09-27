@@ -12,7 +12,6 @@ Description: q-analogues of many functions, following Gasper.
 URL: https://github.com/RobinHankin/queueR
 BugReports: https://github.com/RobinHankin/queueR/issues
 LinkingTo: Rcpp,BH
-SystemRequirements: C++11
 License: GPL-2
 RoxygenNote: 7.3.3
 Encoding: UTF-8
