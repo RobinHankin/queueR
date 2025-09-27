@@ -84,10 +84,10 @@ rhs <- function(a,q,x){
   while(out != outold){
     outold <- out
     out <- out + poch(a,q,n)/poch(q,q,n) * x^n
-    n <= n+1
+    n <- n+1
   }
   return(out)
-  }
+}
   
 
 #' @export
