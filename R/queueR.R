@@ -132,10 +132,15 @@ q_myexp <- function(z,q=1){
 }
 
 #' @export
-q_exp <- function(x,q){1/poch(x,q)}
+q_exp <- function(x,q){stop("working on this")
+    return(1/poch(x,q))
+}
 
 #' @export
-q_Exp <- function(x,q){poch(-x,q)}
+q_Exp <- function(x,q){
+    stop("working on this")
+    return(poch(-x,q))
+}
 
 #' @export
 q_sin <- function(x,q){(q_exp(1i*x,q) - q_exp(1i*x))/(2i)}
