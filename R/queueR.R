@@ -1,3 +1,11 @@
+#' @useDynLib mypackage, .registration=TRUE
+
+#' @importFrom stats integrate
+#' @importFrom stats qgamma
+#' @importFrom Rcpp evalCpp
+
+
+#' @export
 poch_complex_n <- function(a,q=a,alpha,maxit=1e6){
   jj <- cbind(Re(a),Im(a),Re(q),Im(q),Inf)
   jj <- pochhammer(a_real=jj[,1],a_imag=jj[,2], q_real=jj[,3],q_imag=jj[,4], n=jj[,5],maxit)
@@ -12,6 +20,7 @@ poch_complex_n <- function(a,q=a,alpha,maxit=1e6){
   return(out)
 }
 
+#' @export
 `poch` <- function(a,q=a,n=Inf,maxit=1e6){ # n integer or infinite
   if(any(n != round(n))){return(poch_complex_n(a,q,n))}
 
@@ -41,8 +50,10 @@ poch_complex_n <- function(a,q=a,alpha,maxit=1e6){
   return(z)
 }
 
+#' @export
 `pochprod` <- function(avec,q=1,n=Inf){ prod(sapply(avec,function(a){poch(a,q,n)}))}
 
+#' @export
 `pochR` <- function(a,q=a,n=Inf){
   if(any(n<0)){
     wanted <- which(n<0)
@@ -65,6 +76,7 @@ poch_complex_n <- function(a,q=a,alpha,maxit=1e6){
   return(out)
 }
 
+#' @export
 rhs <- function(a,q,x){
   out <- 0
   outold <- 1
@@ -78,6 +90,7 @@ rhs <- function(a,q,x){
   }
   
 
+#' @export
 disc <- function(a,x,q){
 
   LHS <- poch(a*x,q)/poch(x,q)
@@ -85,22 +98,30 @@ disc <- function(a,x,q){
   return(c(LHS=LHS,RHS=RHS,diff=RHS-LHS))
 }
 
+#' @export
 q_factorial <- function(n,q=1){
     out <- poch(q,q,n)/(1-q)^n
     out[q==1] <- factorial(n[q==1])
     return(out)
 }
 
+#' @export
 qfactorial_int <- function(n,q=1){
     stopifnot(n>=0)
     stopifnot(n==round(n))
     prod(unlist(lapply(sapply(seq_len(n),seq_len),\(x){sum(q^(x-1))})))
 }
 
+#' @export
 q_choose <- function(n,k,q=1){q_factorial(n,q)/(q_factorial(n-k,q)*q_factorial(k,q))}
+
+#' @export
 q_gamma <- function(x,q=1){q_factorial(x-1,q)}
+
+#' @export
 q_binom <- function(n,k,q=1){ poch(q,q,n)/poch(q,q,k)/poch(q,q,n-k)}
 
+#' @export
 q_myexp <- function(z,q=1){
     jj <- cbind(c(Re(z)),c(Im(z)),c(Re(q)),c(Im(q)))
     jj <- qexp_C(z_real=jj[,1],z_imag=jj[,2], q_real=jj[,3],q_imag=jj[,4], maxit=1e6)
@@ -110,23 +131,35 @@ q_myexp <- function(z,q=1){
     return(out)
 }
 
+#' @export
 q_exp <- function(x,q){1/poch(x,q)}
+
+#' @export
 q_Exp <- function(x,q){poch(-x,q)}
 
+#' @export
 q_sin <- function(x,q){(q_exp(1i*x,q) - q_exp(1i*x))/(2i)}
+
+#' @export
 q_cos <- function(x,q){(q_exp(1i*x,q) + q_exp(1i*x))/(2 )}
 
+#' @export
 q_Sin <- function(x,q){(q_Exp(1i*x,q) - q_Exp(1i*x))/(2i)}
+
+#' @export
 q_Cos <- function(x,q){(q_Exp(1i*x,q) + q_Exp(1i*x))/(2 )}
 
+#' @export
 q_beta <- function(a,b,q){q_gamma(a,q)*q_gamma(b,q)/qgamma(a+b,q)}
 
+#' @export
 q_n <- function(n,q=1){
     out <- (1-q^n)/(1-q)
     out[q==1] <- n
     return(out)
 }
 
+#' @export
 q_hypergeo <- function(z,q, a,b, maxit = 2000){
   jj <- cbind(c(z),c(q))
 
