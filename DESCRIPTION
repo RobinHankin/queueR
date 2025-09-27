@@ -2,7 +2,7 @@ Package: queueR
 Type: Package
 Title: q-analogues of a range of functions
 Version: 0.0-1
-Imports: partitions (>= 1.9-17), mathjaxr
+Imports: partitions (>= 1.9-17)
 Suggests: elliptic, knitr
 VignetteBuilder: knitr
 Authors@R: c(
@@ -12,7 +12,6 @@ Depends: R (>= 4.5.0), methods, Rcpp
 Description: q-analogues of many functions, following Gasper.
 URL: https://github.com/RobinHankin/queueR
 BugReports: https://github.com/RobinHankin/queueR/issues
-RdMacros: mathjaxr
 LinkingTo: Rcpp,BH
 SystemRequirements: C++11
 License: GPL-2
